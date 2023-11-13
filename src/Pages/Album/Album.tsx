@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import ContentLoader from 'react-content-loader'
 import { AlbumComponent } from '../Home/AlbumComponent';
-import { useParams } from 'react-router-dom';
 
 const Album = () => {
 //   const homeData = useSelector(homePageData)

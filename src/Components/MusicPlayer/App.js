@@ -5,10 +5,10 @@ import Artwork from "./Elements/Main/Artwork";
 import SongInfo from "./Components/Main/SongInfo";
 import Player from "./Components/PlayerInterface/Player";
 import Library from "./Layouts/Library";
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 import {
-    currentPlaying, songClicked
+    currentPlaying
 } from "../../custom/Redux/Reducers/Album/AlbumSlice";
 function App() {
     // Detect if the user has dark mode turned on
