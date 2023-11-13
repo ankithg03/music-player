@@ -1,8 +1,60 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import ContentLoader from 'react-content-loader'
+import { AlbumComponent } from './AlbumComponent'
 
 const Home = () => {
+  const [homeData, setHomeData] = useState<any>({})
+  const [isLoading, setIsLoading] = useState(false)
+
+  useEffect(() => {
+      setIsLoading(true)
+      fetch('https://saavn.me/modules?language=kannada,hindi,english').then(
+        res => res.json()
+      ).then(jsonResponse => {
+        setTimeout(()=>{
+          setHomeData(jsonResponse)
+          setIsLoading(false)
+        }, 1000)
+      })
+  }, [])
+
   return (
-    <div>Home</div>
+    <div className='flex w-full'>
+      {isLoading ? (
+      <div className='grid gap-4 w-full'>
+        <div className='grid grid-cols-2 gap-4 w-full md:grid-cols-3'>
+          <ContentLoader
+            speed={2}
+            width={'100%'}
+            viewBox="0 0 300 30"
+            backgroundColor="#dbebff"
+            foregroundColor="#ecebeb"
+          >
+            <rect x="1" y="1" rx="2" ry="2" width="100%" height="29" />
+          </ContentLoader>
+        </div>
+        <div className='grid grid-cols-2 gap-4 w-full md:grid-cols-3'>
+            {Array(20).fill(20).map((item,key) => {
+              return (<ContentLoader
+                key={key}
+                speed={2}
+                width={'100%'}
+                viewBox="0 0 300 330"
+                backgroundColor="#dbebff"
+                foregroundColor="#ecebeb"
+              >
+                <rect x="1" y="313" rx="2" ry="2" width="100%" height="22" />
+                <rect x="1" y="1" rx="2" ry="2" width="100%" height="300" />
+              </ContentLoader>)
+            })}
+          </div></div>) :
+        (<div className='grid gap-4'>
+          <AlbumComponent albumData={homeData?.data?.trending?.albums} title={'Trending'}/>
+          <AlbumComponent albumData={homeData?.data?.charts} title={'Charts'}/>
+          <AlbumComponent albumData={homeData?.data?.playlists} title={'Playlists'}/>
+          <AlbumComponent albumData={homeData?.data?.album} title={'Album'}/>
+        </div>)}
+    </div>
   )
 }
 

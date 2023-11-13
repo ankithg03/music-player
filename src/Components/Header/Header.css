@@ -1,0 +1,7 @@
+.music-header {
+    grid-template-columns: 4fr 1fr;
+}
+.search-box-item {
+    grid-column-start: 1;
+    grid-column-end: five;
+}

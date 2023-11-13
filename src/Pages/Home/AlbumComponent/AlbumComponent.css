@@ -1,0 +1,6 @@
+.album-item img:hover{
+    filter: grayscale(1) contrast(1.5);
+}
+.album-item img{
+    transition: .6s all;
+}
