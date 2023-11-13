@@ -10,7 +10,7 @@ function LibrarySongCover({ song }) {
                 alt="Artwork"
                 className="library-song-cover-art"
                 style={{
-                    boxShadow: `${shadow(0, 0, 15, 0, colors[song.palette])}`,
+                    boxShadow: `${shadow(0, 0, 15, 0, colors[song?.palette])}`,
                 }}
             />
         </figure>

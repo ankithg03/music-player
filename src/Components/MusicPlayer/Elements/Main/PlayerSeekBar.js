@@ -4,7 +4,7 @@ import gradients from "../../Utils/Gradients";
 import shadow from "../../Utils/Shadows";
 
 function PlayerSeekBar({ songState, audioRef, setSongState }) {
-    const currentPalette = songState.currentSong[0].palette;
+    const currentPalette = songState.currentSong[0]?.palette;
 
     const playerSeekHandler = (e) => {
         //Changing the value of the duration and elapsed

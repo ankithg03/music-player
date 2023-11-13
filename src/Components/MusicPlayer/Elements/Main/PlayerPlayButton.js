@@ -16,7 +16,7 @@ function PlayerPlayButton({
     audioRef,
     setSongState,
 }) {
-    const currentPalette = songState.currentSong[0].palette;
+    const currentPalette = songState.currentSong[0]?.palette;
     const isSongClicked = useSelector(songClicked)
     const dispatch = useDispatch()
     const playPauseHandler = () => {
