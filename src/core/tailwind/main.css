@@ -1,0 +1,13 @@
+.menu {
+    background-color: rgb(255 214 160);
+    padding: 1rem;
+}
+.menu .logo {
+    font-family: monospace;
+    font-size: x-large;
+    font-weight: 400;
+    background-color: rgb(156 105 18);
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    box-shadow: 3px 3px 8px 0px rgb(80 22 5);
+}
