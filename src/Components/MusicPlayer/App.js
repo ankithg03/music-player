@@ -36,12 +36,9 @@ function App() {
         elapsed: 0,
         duration: 0,
     });
-    console.log('aaa music -- 0', isSongClicked)
     useEffect(() => {
         if(songState?.currentSong?.[0]?.id && currentPlayingData.id && songState?.currentSong?.[0]?.id !== currentPlayingData.id) {
             setSongState({...songState, currentSong: [songData[0]], isPlaying: true})
-            
-            console.log('aaa music -- 1', audioRef, audioRef?.current?.play, 'clicked-->', isSongClicked)            
         }
     
     }, [songData?.[0].id], setSongState)

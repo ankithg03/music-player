@@ -32,7 +32,6 @@ function PlayerPlayButton({
 
     useEffect(() => {
         if(isSongClicked) {
-                console.log('aaa music 2', uiState.songPlaying === true)
                 audioRef.current.play();
                 setTimeout(()=>{
                     setUiState({ ...uiState, songPlaying: !uiState.songPlaying });
