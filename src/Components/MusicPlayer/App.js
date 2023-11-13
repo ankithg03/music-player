@@ -39,7 +39,7 @@ function App() {
             setSongState({...songState, currentSong: [songData[0]], isPlaying: true})
         }
     
-    }, [songData?.[0].id], setSongState)
+    }, [songData?.[0]?.id], setSongState)
     
 
     // Reference for the audio
