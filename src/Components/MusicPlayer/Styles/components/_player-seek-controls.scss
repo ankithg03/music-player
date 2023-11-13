@@ -3,6 +3,7 @@
         display: flex;
         gap: $space-xsm;
         width: $clamp-player-seek-control-width;
+        max-width: 100%;
         align-items: center;
         justify-content: space-between;
         margin: auto;

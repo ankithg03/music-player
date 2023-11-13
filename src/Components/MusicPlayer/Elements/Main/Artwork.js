@@ -3,7 +3,7 @@ import colors from "../../Utils/Colors";
 import shadow from "../../Utils/Shadows";
 
 function Artwork({ uiState, songState }) {
-    const currentPalette = songState.currentSong[0].palette;
+    const currentPalette = songState.currentSong[0]?.palette;
 
     return (
         <div
@@ -19,7 +19,7 @@ function Artwork({ uiState, songState }) {
             }}
         >
             <img
-                src={`${songState.currentSong[0].coverUrl}`}
+                src={`${songState.currentSong[0]?.coverUrl}`}
                 alt="Album Art"
                 className={`artwork__img`}
                 style={{

@@ -7,7 +7,7 @@ function SongInfoArtist({ songState }) {
             className="song-info__artist"
             style={{ color: `${colors[songState.currentSong[0]?.palette]}` }}
         >
-            {songState.currentSong[0].artist}
+            {songState.currentSong[0]?.artist}
         </h1>
     );
 }

@@ -39,7 +39,7 @@ const AlbumComponent = ({ albumData, title, type }: AlbumData) => {
                                         thumbUrl:
                                             album?.image?.[album.image.length - 1]?.link,
                                         audio: downloadUrl,
-                                        palette: "coral",
+                                        palette: "blue",
                                         id: album?.id,
                                     }
                                     localStorage.setItem('current-playing', JSON.stringify(data))
