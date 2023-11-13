@@ -112,7 +112,7 @@ function App() {
             />
             <audio
                 ref={audioRef}
-                src={songState.currentSong[0].audio}
+                src={songState.currentSong[0]?.audio}
                 onTimeUpdate={songInfoHandler}
                 onLoadedMetadata={songInfoHandler}
                 onEnded={songEndHandler}
