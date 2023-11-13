@@ -1,0 +1,7 @@
+.player {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: $space-sm 0;
+    gap: $space-sm;
+}

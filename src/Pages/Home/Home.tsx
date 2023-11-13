@@ -1,23 +1,31 @@
 import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import ContentLoader from 'react-content-loader'
 import { AlbumComponent } from './AlbumComponent'
-
+import {
+  setHomePage,
+  homePageData
+} from "../../custom/Redux/Reducers/Album/AlbumSlice";
 const Home = () => {
-  const [homeData, setHomeData] = useState<any>({})
+  const dispatch = useDispatch();
+  const homeData = useSelector(homePageData)
   const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
+    if(homeData.status?.toLowerCase() !== "success"){
       setIsLoading(true)
       fetch('https://saavn.me/modules?language=kannada,hindi,english').then(
         res => res.json()
       ).then(jsonResponse => {
         setTimeout(()=>{
-          setHomeData(jsonResponse)
+          // setHomePage(jsonResponse)
+          dispatch(setHomePage(jsonResponse))
           setIsLoading(false)
         }, 1000)
       })
-  }, [])
-
+    }
+  }, [homeData])
+  console.log('aaa', homeData)
   return (
     <div className='flex w-full'>
       {isLoading ? (
@@ -49,8 +57,8 @@ const Home = () => {
             })}
           </div></div>) :
         (<div className='grid gap-4'>
-          <AlbumComponent albumData={homeData?.data?.trending?.albums} title={'Trending'}/>
-          <AlbumComponent albumData={homeData?.data?.charts} title={'Charts'}/>
+          <AlbumComponent albumData={homeData?.data?.trending?.albums} title={'Trending'} />
+          <AlbumComponent albumData={homeData?.data?.charts}/>
           <AlbumComponent albumData={homeData?.data?.playlists} title={'Playlists'}/>
           <AlbumComponent albumData={homeData?.data?.album} title={'Album'}/>
         </div>)}

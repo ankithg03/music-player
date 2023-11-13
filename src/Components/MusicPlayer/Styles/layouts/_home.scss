@@ -1,0 +1,31 @@
+
+
+.dark-mode {
+    background: linear-gradient(135deg, #313131cb 0%, #000000cb 100%);
+    color: $color-white;
+}
+.light-mode {
+    background: linear-gradient(135deg, #e6e9f0c5 0%, #eef1f5c5 100%);
+    color: $color-darkmode;
+}
+
+// Grid Layout for the desktop
+@media only screen and (min-width: 900px) {
+    body {
+        overflow-y: scroll;
+        scrollbar-width: thin;
+        scrollbar-color: #7777 $color-grey-transparent;
+        &::-webkit-scrollbar {
+            width: 1rem;
+        }
+        &::-webkit-scrollbar-track {
+            background: $color-grey-transparent;
+            border-radius: 10rem;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: #7777;
+            border-radius: 10rem;
+        }
+    }
+}
