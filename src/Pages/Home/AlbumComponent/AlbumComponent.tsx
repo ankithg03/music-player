@@ -58,7 +58,14 @@ const AlbumComponent = ({ albumData, title, type }: AlbumData) => {
                             </Link>
                         )
                     }
-                    return null
+                    if (album?.type == "playlist") {
+                        return (
+                            <Link to={`/playlist?id=${album?.id}`}>
+                                {albumData}
+                            </Link>
+                        )
+                    }
+                    return albumData
 
                 })}
             </div>

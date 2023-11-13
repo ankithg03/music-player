@@ -2,15 +2,15 @@ import React, { useEffect, useState } from 'react'
 import ContentLoader from 'react-content-loader'
 import { AlbumComponent } from '../Home/AlbumComponent';
 
-const Album = () => {
+const Playlist = () => {
 //   const homeData = useSelector(homePageData)
     const [album, setAlbum] = useState<any>({})
 
   const [isLoading, setIsLoading] = useState(true)
   const [isInvalid, setIsInvalid] = useState(false)
 
-  const handleGetAlbum = (albumURL:string, id:string|false = '') => {
-        fetch('https://saavn.me/albums?link='+albumURL).then(
+  const handleGetAlbum = (id:string|false = '') => {
+        fetch('https://saavn.me/playlists?id='+id).then(
             res => res.json()
           ).then(jsonResponse => {
             console.log('aaa', jsonResponse)
@@ -31,24 +31,19 @@ const Album = () => {
         }
         return tempQuery
     }
-    console.log('aaa 0 ', album)
 
-  useEffect(() => {
-    if(typeof window !== undefined) {
-
-        let query = getQueryVariable('query')
-        query = queryFix(query? query: '')
-        console.log('aaa final', query)
-        const id = getQueryVariable('id')
-        if(!query) {
-            setIsInvalid(true)
-        } else {
-          setIsLoading(true)
-          handleGetAlbum(query, id)
-      }
-    }
-      
-  }, [])
+    useEffect(() => {
+      if(typeof window !== undefined) {
+        const queryId = getQueryVariable('id')
+          if(!queryId) {
+              setIsInvalid(true)
+          } else {
+            setIsLoading(true)
+            handleGetAlbum(queryId)
+        }
+      }  
+    }, [])
+    
   return (
     <div className='flex w-full'>
       {isInvalid ? 'Invalid URL please try later':''}
@@ -103,4 +98,4 @@ const getQueryVariable = (variable:string) =>
          }
          return(false);
 }
-export default Album
+export default Playlist
