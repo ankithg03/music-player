@@ -1,22 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
 import ContentLoader from 'react-content-loader'
-import {
-  setHomePage,
-  homePageData
-} from "../../custom/Redux/Reducers/Album/AlbumSlice";
 import { AlbumComponent } from '../Home/AlbumComponent';
 import { useParams } from 'react-router-dom';
 
 const Album = () => {
-  const dispatch = useDispatch();
 //   const homeData = useSelector(homePageData)
     const [album, setAlbum] = useState<any>({})
 
   const [isLoading, setIsLoading] = useState(true)
   const [isInvalid, setIsInvalid] = useState(false)
 
-  const params = useParams();
   const handleGetAlbum = (albumURL:string, id:string|false = '') => {
         fetch('https://saavn.me/albums?link='+albumURL).then(
             res => res.json()

@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import {
     RiPlayListLine,
     RiSunLine,
@@ -66,19 +66,6 @@ function PlayerControl({
         if (window.visualViewport.width < 900) {
             setUiState({ ...uiState, libraryShown: true });
             console.log("changed");
-        }
-    };
-
-    const songEndHandler = async () => {
-        await setSongState({
-            ...songState,
-            currentSong: [songData[(currentIndex + 1) % songData.length]],
-        });
-        if (songState.currentSong[0].isPlaying) {
-            const playPromise = audioRef.current.play();
-            if (playPromise !== undefined) {
-                playPromise.then((audio) => audioRef.current.play());
-            }
         }
     };
 

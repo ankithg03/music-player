@@ -7,7 +7,7 @@ import gradients from "../../Utils/Gradients";
 import { useDispatch, useSelector } from 'react-redux'
 
 import {
-    currentPlaying, songClicked, setSongClick
+    songClicked, setSongClick
 } from "../../../../custom/Redux/Reducers/Album/AlbumSlice";
 function PlayerPlayButton({
     uiState,

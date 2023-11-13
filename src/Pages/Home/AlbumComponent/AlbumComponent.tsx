@@ -1,11 +1,9 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import './AlbumComponent.css'
 import {
-    setCurrentPlaying,
-    currentPlaying,
-    setSongClick
+    setCurrentPlaying
 } from "../../../custom/Redux/Reducers/Album/AlbumSlice";
 type AlbumData = {
     albumData: any[] | undefined,
@@ -47,7 +45,6 @@ const AlbumComponent = ({ albumData, title, type }: AlbumData) => {
                                     console.log('aaaa data', album, data)
                                     localStorage.setItem('current-playing', JSON.stringify(data))
                                     dispatch(setCurrentPlaying(data))
-                                    // dispatch(setSongClick(true))
                                     }}>
                                 {albumData}
                             </a>
@@ -62,6 +59,7 @@ const AlbumComponent = ({ albumData, title, type }: AlbumData) => {
                             </Link>
                         )
                     }
+                    return null
 
                 })}
             </div>

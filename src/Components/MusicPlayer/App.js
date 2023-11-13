@@ -8,7 +8,7 @@ import Library from "./Layouts/Library";
 import { useDispatch, useSelector } from 'react-redux'
 
 import {
-    currentPlaying, songClicked, setSongClick
+    currentPlaying, songClicked
 } from "../../custom/Redux/Reducers/Album/AlbumSlice";
 function App() {
     // Detect if the user has dark mode turned on
@@ -17,8 +17,6 @@ function App() {
     ).matches;
     const currentPlayingData = useSelector(currentPlaying)
     const songData = [currentPlayingData]
-    const isSongClicked = useSelector(songClicked)
-    const dispatch = useDispatch()
     // UI Components State
     const [uiState, setUiState] = useState({
         aboutShown: false,
