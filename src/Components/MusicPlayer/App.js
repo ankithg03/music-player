@@ -35,7 +35,7 @@ function App() {
         duration: 0,
     });
     useEffect(() => {
-        if(songState?.currentSong?.[0]?.id && currentPlayingData.id && songState?.currentSong?.[0]?.id !== currentPlayingData.id) {
+        if(songState?.currentSong?.[0]?.id && currentPlayingData?.id && songState?.currentSong?.[0]?.id !== currentPlayingData?.id) {
             setSongState({...songState, currentSong: [songData[0]], isPlaying: true})
         }
     

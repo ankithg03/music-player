@@ -25,7 +25,7 @@ const AlbumComponent = ({ albumData, title, type }: AlbumData) => {
 
                         <p className='my-2'>{album.name}</p>
                     </div>)
-                    if (type == "song" || album.type == "song") {
+                    if (type == "song" || album?.type == "song") {
                         const downloadUrl = album?.downloadUrl?.[album.downloadUrl.length - 1]?.link
                         return downloadUrl?(
                             <a  
@@ -33,28 +33,27 @@ const AlbumComponent = ({ albumData, title, type }: AlbumData) => {
                                 onClick={() => {
                                     
                                     const data = {
-                                        title: album.name,
+                                        title: album?.name,
                                         artist: album?.primaryArtists,
-                                        coverUrl:album.image?.[album.image.length - 1].link,
+                                        coverUrl:album?.image?.[album.image.length - 1]?.link,
                                         thumbUrl:
-                                            album.image?.[album.image.length - 1].link,
+                                            album?.image?.[album.image.length - 1]?.link,
                                         audio: downloadUrl,
                                         palette: "coral",
-                                        id: album.id,
+                                        id: album?.id,
                                     }
-                                    console.log('aaaa data', album, data)
                                     localStorage.setItem('current-playing', JSON.stringify(data))
                                     dispatch(setCurrentPlaying(data))
                                     }}>
                                 {albumData}
                             </a>
-                        ):(<a href={album.url} target="_blank" rel="noopener noreferrer">
+                        ):(<a href={album?.url} target="_blank" rel="noopener noreferrer">
                         {albumData}
                     </a>)
                     }
-                    if (type == 'album' ||  album.type == "album") {
+                    if (type == 'album' ||  album?.type == "album") {
                         return (
-                            <Link to={`/album?id=${album.id}&query=${album.url}`}>
+                            <Link to={`/album?id=${album?.id}&query=${album?.url}`}>
                                 {albumData}
                             </Link>
                         )

@@ -31,7 +31,7 @@ function LibraryListItem({ song, setSongState, songState, audioRef }) {
         <div
             onClick={changeCurrentSongHandler}
             className={`library__list-item ${
-                song.id === songState.currentSong[0].id ? "active-song" : ""
+                song?.id === songState.currentSong[0]?.id ? "active-song" : ""
             }`}
         >
             <LibrarySongCover song={song} />
