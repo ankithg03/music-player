@@ -18,7 +18,7 @@ export const DraggableMusicPlayer = ({ playerModelRef }: any) => {
     }
   };
 
-  const style = !isToggle?{height: '100vh', top:'67vh'}: {height:'100vh', top: '5vh'}
+  const style = !isToggle?{height: '100vh', top:'67vh'}: {height:'100vh', top: '0vh'}
 
   return (
     <div
