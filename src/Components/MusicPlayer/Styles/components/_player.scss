@@ -6,3 +6,8 @@
     gap: $space-sm;
     margin-bottom: 10vh;
 }
+.active {
+    .player {
+        margin-bottom: $space-sm;
+    }
+}

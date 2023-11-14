@@ -22,7 +22,7 @@ export const DraggableMusicPlayer = ({ playerModelRef }: any) => {
 
   return (
     <div
-      className={`w-full block fixed bottom-0 z-100 overflow-y-clip transition-top duration-500 ${isToggle?'top-unset sm:top-0':''}`}
+      className={`w-full block fixed bottom-0 z-100 overflow-y-clip transition-top duration-500 ${isToggle?'active top-unset sm:top-0':''}`}
       style={style}
       role='presentation'
       onClick={handleClick}
