@@ -13,7 +13,7 @@ const Album = () => {
         fetch('https://saavn.me/albums?link='+albumURL).then(
             res => res.json()
           ).then(jsonResponse => {
-            console.log('aaa', jsonResponse)
+            // console.log('aaa', jsonResponse)
                 setTimeout(()=>{
                     setAlbum(jsonResponse)
                     setIsLoading(false)
@@ -31,14 +31,12 @@ const Album = () => {
         }
         return tempQuery
     }
-    console.log('aaa 0 ', album)
 
   useEffect(() => {
     if(typeof window !== undefined) {
 
         let query = getQueryVariable('query')
         query = queryFix(query? query: '')
-        console.log('aaa final', query)
         const id = getQueryVariable('id')
         if(!query) {
             setIsInvalid(true)
@@ -80,7 +78,7 @@ const Album = () => {
               </ContentLoader>)
             })}
           </div></div>) :
-        (<div className='grid gap-4 max-h-[80vh] overflow-y-scroll'>
+        (<div className='grid gap-4 max-h-[65vh] overflow-y-scroll pb-8'>
           <AlbumComponent 
             albumData={album?.data?.songs} 
             title={album?.data?.name}  

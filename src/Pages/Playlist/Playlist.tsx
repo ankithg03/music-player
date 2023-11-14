@@ -13,7 +13,7 @@ const Playlist = () => {
         fetch('https://saavn.me/playlists?id='+id).then(
             res => res.json()
           ).then(jsonResponse => {
-            console.log('aaa', jsonResponse)
+            // console.log('aaa', jsonResponse)
                 setTimeout(()=>{
                     setAlbum(jsonResponse)
                     setIsLoading(false)
@@ -75,7 +75,7 @@ const Playlist = () => {
               </ContentLoader>)
             })}
           </div></div>) :
-        (<div className='grid gap-4 max-h-[80vh] overflow-y-scroll'>
+        (<div className='grid gap-4 max-h-[65vh] overflow-y-scroll pb-8'>
           <AlbumComponent 
             albumData={album?.data?.songs} 
             title={album?.data?.name}  

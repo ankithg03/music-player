@@ -8,9 +8,14 @@ function Player({
     setSongState,
     audioRef,
     seekWidth,
+    audioSectionRef
 }) {
     return (
-        <div className="player">
+        <div className="player player w-full sm:w-fit cursor-auto" onClick={(e)=>{
+            console.log(e.target)
+            e.preventDefault()
+        }}
+        ref={audioSectionRef}>
             <SeekControl
                 uiState={uiState}
                 setUiState={setUiState}

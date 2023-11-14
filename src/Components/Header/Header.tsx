@@ -12,7 +12,7 @@ const Header = () => {
                 <div
                     className="w-full text-start text-lg font-extrabold sm:w-fit sm:text-left pb-4"
                 >
-                    <span className="text-violet-500">Savaan</span>
+                    <span className="text-violet-500">Ank's</span>
                     <span className="dark:text-slate-400">Music</span>
                 </div>
             </NavLink>

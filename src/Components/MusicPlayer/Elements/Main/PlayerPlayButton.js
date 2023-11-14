@@ -34,7 +34,7 @@ function PlayerPlayButton({
         if(isSongClicked) {
                 audioRef.current.play();
                 setTimeout(()=>{
-                    setUiState({ ...uiState, songPlaying: !uiState.songPlaying });
+                    setUiState({ ...uiState, songPlaying: true });
                     audioRef.current.play();                   
                 }, 300)
                 dispatch(setSongClick(false))

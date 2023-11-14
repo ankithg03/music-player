@@ -1,9 +1,15 @@
 import React from "react";
-import MenuIcon from "../../Elements/Common/MenuIcon";
-function MenuHeader({ uiState, setUiState }) {
+import { RiCloseCircleFill } from "react-icons/ri";
+
+function MenuHeader({ setIsToggle, isToggle }) {
     return (
         <nav className="nav__header">
-            <MenuIcon uiState={uiState} setUiState={setUiState} />
+            <button 
+                className="text-black end-2.5 bottom-2.5  focus:outline-none  font-medium rounded-lg text-sm px-2 py-2" 
+                onClick={()=>{
+                    setIsToggle(false)
+                }}
+            >{isToggle ? (<RiCloseCircleFill className="player__control-icon text-5xl"/>): ''}</button>
         </nav>
     );
 }

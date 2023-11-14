@@ -10,7 +10,8 @@ import { useSelector } from 'react-redux'
 import {
     currentPlaying
 } from "../../custom/Redux/Reducers/Album/AlbumSlice";
-function App() {
+
+function App(props) {
     // Detect if the user has dark mode turned on
     let userDarkModeApplied = window.matchMedia(
         "(prefers-color-scheme: dark)"
@@ -41,6 +42,7 @@ function App() {
     
     }, [songData?.[0]?.id], setSongState)
     
+    const audioSectionRef = props.audioRef
 
     // Reference for the audio
     const audioRef = useRef(null);
@@ -74,14 +76,14 @@ function App() {
     }
     return (
         <div
-            className={`app__wrapper ${
+            className={`app__wrapper rounded-tl-xl rounded-tr-xl cursor-auto sm:cursor-pointer ${
                 uiState.darkMode ? "dark-mode" : "light-mode"
             }`}
             style={{
                 backdropFilter: `${
                     uiState.libraryShown || uiState.aboutShown
                         ? "none"
-                        : "blur(1.5rem)"
+                        : "blur(1rem)"
                 }`,
                 WebkitBackdropFilter: `${
                     uiState.libraryShown || uiState.aboutShown
@@ -92,16 +94,24 @@ function App() {
         >
             {/* The menu header only displays the menu options */}
             {/* It only needs access to isNavMenuShown, setNavMenuShown, */}
-            <MenuHeader uiState={uiState} setUiState={setUiState} />
-            <Artwork uiState={uiState} songState={songState} />
-            <SongInfo songState={songState} />
+            <MenuHeader 
+                uiState={uiState} 
+                setUiState={setUiState} 
+                playerModel={props?.playerModel}
+                setIsToggle={props?.setIsToggle}
+                isToggle={props?.isToggle}
+            />
             <Player
                 uiState={uiState}
                 setUiState={setUiState}
                 audioRef={audioRef}
                 songState={songState}
                 setSongState={setSongState}
+                audioSectionRef={audioSectionRef}
             />
+            <Artwork uiState={uiState} songState={songState} />
+            <SongInfo songState={songState} />
+            
             <Library
                 uiState={uiState}
                 setUiState={setUiState}

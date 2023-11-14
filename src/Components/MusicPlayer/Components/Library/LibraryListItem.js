@@ -1,13 +1,18 @@
 import React from "react";
-import songData from "../../Data/SongData";
 import LibrarySongArtist from "../../Elements/Library/LibrarySongArtist";
 import LibrarySongCover from "../../Elements/Library/LibrarySongCover";
 import LibrarySongTitle from "../../Elements/Library/LibrarySongTitle";
+import { useSelector } from 'react-redux'
+
+import {
+    currentPlaying
+} from "../../../../custom/Redux/Reducers/Album/AlbumSlice";
 
 function LibraryListItem({ song, setSongState, songState, audioRef }) {
     // console.log(song.id === songState.currentSong[0].id);
     // currentSong: [songData[(currentIndex + 1) % songData.length]],
-
+    const currentPlayingData = useSelector(currentPlaying)
+    const songData = [currentPlayingData]
     const changeCurrentSongHandler = () => {
         setTimeout(() => {
             setSongState({
@@ -19,13 +24,12 @@ function LibraryListItem({ song, setSongState, songState, audioRef }) {
                 const playPromise = audioRef.current.play();
                 console.log(playPromise);
                 if (playPromise !== undefined) {
-                    console.log("undefined");
                     playPromise.then((audio) => {
                         audioRef.current.play();
                     });
                 }
             }
-        }, 150);
+        }, 100);
     };
     return (
         <div

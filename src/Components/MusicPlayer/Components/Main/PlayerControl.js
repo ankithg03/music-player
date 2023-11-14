@@ -6,7 +6,11 @@ import {
     RiSkipBackLine,
     RiSkipForwardLine,
 } from "react-icons/ri";
-import songData from "../../Data/SongData";
+import { useSelector } from 'react-redux'
+
+import {
+    currentPlaying
+} from "../../../../custom/Redux/Reducers/Album/AlbumSlice";
 import PlayerPlayButton from "../../Elements/Main/PlayerPlayButton";
 
 function PlayerControl({
@@ -16,6 +20,8 @@ function PlayerControl({
     setSongState,
     audioRef,
 }) {
+    const currentPlayingData = useSelector(currentPlaying)
+    const songData = [currentPlayingData]
     let currentIndex = songData.findIndex(
         (song) => song === songState.currentSong[0]
     );
