@@ -3,10 +3,9 @@
   "short_name": "A simple music player",
   "theme_color": "#fff",
   "background_color": "#ffd300",
-  "display": "browser",
-  "orientation": "portrait",
+  "display": "standalone",
   "scope": "/",
-  "start_url": "/",
+  "start_url": ".",
   "icons": [
     {
       "src": "images/icons/icon-72x72.png",
