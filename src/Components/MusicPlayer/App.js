@@ -49,8 +49,14 @@ function App(props) {
         }
     
     }, [songData?.[0]?.id], setSongState)
-    
+    useEffect(()=>{
+        console.log('aaa', songState, songState.currentSong?.[0]?.id, [currentPlayingData])
+        if(!songState.currentSong?.[0]?.id){
+            setSongState({...songState, currentSong: [currentPlayingData]})
+        }
+    }, [currentPlayingData])
     const audioSectionRef = props.audioRef
+    console.log('aaaa 0', songState, currentPlaying, currentPlayingData, audioSectionRef)
 
     // Reference for the audio
     const audioRef = useRef(null);
@@ -91,7 +97,7 @@ function App(props) {
             ...songState,
             currentSong: [songData[(currentIndex + 1) % songData.length]],
         });
-        if(uiState.loop) {
+        if(uiState.loop && !songState.isPlaying) {
             const playPromise = audioRef.current.play();
             if (playPromise !== undefined) {
                 playPromise.then((audio) => {

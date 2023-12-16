@@ -1,6 +1,6 @@
 {
   "name": "AG's Music Player",
-  "short_name": "A simple music player",
+  "short_name": "AG's Music Player",
   "theme_color": "#fff",
   "background_color": "#ffd300",
   "display": "standalone",

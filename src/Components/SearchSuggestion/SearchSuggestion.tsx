@@ -190,11 +190,13 @@ const SuggestionsList = (props: any) => {
   }, [searchTerm, setDebouncedSearchTerm])
 
   useEffect(()=>{
-    fetch('https://saavn.me/search/all?query='+debouncedSearchTerm).then((res)=>res.json()).then(async (result)=>{
-            const data = await filterSong(result.data)
-            setFilteredSuggestions(data);
-            setIsLoading(false)
+    if(debouncedSearchTerm.length) {
+      fetch('https://saavn.me/search/all?query='+debouncedSearchTerm).then((res)=>res.json()).then(async (result)=>{
+        const data = await filterSong(result.data)
+        setFilteredSuggestions(data);
+        setIsLoading(false)
     })
+    }
   },[debouncedSearchTerm])
 
     

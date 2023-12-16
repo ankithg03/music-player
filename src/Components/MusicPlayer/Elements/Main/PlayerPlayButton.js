@@ -30,21 +30,19 @@ function PlayerPlayButton({
             }
             setSongState({ ...songState, isPlaying: false });
         } else if(!songState.isPlaying) {
-            console.log('aaa 1', audioRef.current.isPlaying)
+            console.log('aaa here')
             const playPromise = audioRef.current.play();
             if (playPromise !== undefined) {
                 playPromise.then((audio) => {
                     audioRef.current.play();
                 });
             }
-            console.log('aaa 2')
             setSongState({ ...songState, isPlaying: true });
         }
     };
 
     useEffect(() => {
         if(isSongClicked) {
-                audioRef.current.play();
                 setTimeout(()=>{
                     setUiState({ ...uiState, songPlaying: true });
                     const playPromise = audioRef.current.play();
