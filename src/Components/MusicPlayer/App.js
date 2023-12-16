@@ -74,7 +74,7 @@ function App(props) {
                 ...songState,
                 currentSong: [songData[(currentIndex + 1) % songData.length]],
             });
-            if (!songState.isPlaying) {
+            if (songState.isPlaying) {
                 try{
                     const playPromise = audioRef.current.play();
                     if (playPromise !== undefined) {
@@ -97,7 +97,7 @@ function App(props) {
             ...songState,
             currentSong: [songData[(currentIndex + 1) % songData.length]],
         });
-        if(uiState.loop && songState.isPlaying) {
+        if(uiState.loop) {
             const playPromise = audioRef.current.play();
             if (playPromise !== undefined) {
                 playPromise.then((audio) => {
