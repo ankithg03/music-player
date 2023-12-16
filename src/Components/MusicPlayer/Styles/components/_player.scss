@@ -5,6 +5,13 @@
     margin: $space-sm auto;
     gap: $space-sm;
     margin-bottom: 10vh;
+    &__darkMode {
+        display: flex;
+        max-width: 50rem;
+        align-items: center;
+        justify-content: right;
+        margin-right: 1.7rem;
+    }
 }
 .active {
     .player {

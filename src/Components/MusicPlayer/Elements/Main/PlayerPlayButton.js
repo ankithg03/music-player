@@ -22,10 +22,22 @@ function PlayerPlayButton({
     const playPauseHandler = () => {
         setUiState({ ...uiState, songPlaying: !uiState.songPlaying });
         if (uiState.songPlaying === true) {
-            audioRef.current.pause();
+            const playPromise = audioRef.current.pause();
+            if (playPromise !== undefined) {
+                playPromise.then((audio) => {
+                    audioRef.current.pause();
+                });
+            }
             setSongState({ ...songState, isPlaying: false });
-        } else {
-            audioRef.current.play();
+        } else if(!songState.isPlaying) {
+            console.log('aaa 1', audioRef.current.isPlaying)
+            const playPromise = audioRef.current.play();
+            if (playPromise !== undefined) {
+                playPromise.then((audio) => {
+                    audioRef.current.play();
+                });
+            }
+            console.log('aaa 2')
             setSongState({ ...songState, isPlaying: true });
         }
     };
@@ -35,7 +47,12 @@ function PlayerPlayButton({
                 audioRef.current.play();
                 setTimeout(()=>{
                     setUiState({ ...uiState, songPlaying: true });
-                    audioRef.current.play();                   
+                    const playPromise = audioRef.current.play();
+                    if (playPromise !== undefined) {
+                        playPromise.then((audio) => {
+                            audioRef.current.play();
+                        });
+                    }              
                 }, 300)
                 dispatch(setSongClick(false))
         }

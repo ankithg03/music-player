@@ -17,7 +17,14 @@ function App(props) {
         "(prefers-color-scheme: dark)"
     ).matches;
     const currentPlayingData = useSelector(currentPlaying)
-    const songData = [currentPlayingData]
+    let queue = localStorage.getItem('queue-playing')
+    queue = queue ? JSON.parse(queue) : [currentPlaying]
+    const [songData, setSongData] = useState(queue)
+    useEffect(() => {
+        let queue = localStorage.getItem('queue-playing')
+        queue = queue ? JSON.parse(queue) : [currentPlaying]
+        setSongData(queue)
+    }, [currentPlayingData])
     // UI Components State
     const [uiState, setUiState] = useState({
         aboutShown: false,
@@ -27,6 +34,7 @@ function App(props) {
         coverSpinning: false,
         songPlaying: false,
         seekWidth: 0,
+        loop: false
     });
     // Song States
     const [songState, setSongState] = useState({
@@ -49,6 +57,31 @@ function App(props) {
     // console.log('aaa music', audioRef, {...songState, currentSong: [songData[0]], isPlaying: true}, 'old--', songState)
 
     // Setting the background as the cover artwork
+    let currentIndex = songData.findIndex(
+        (song) => song.id === songState.currentSong?.[0]?.id
+    );
+
+    const nextSongHandler = () => {
+        console.log('aaa 1',songData.length, [songData[(currentIndex + 1) % songData.length]], currentIndex, (currentIndex + 1) % songData.length)
+        setTimeout(() => {
+            setSongState({
+                ...songState,
+                currentSong: [songData[(currentIndex + 1) % songData.length]],
+            });
+            if (!songState.isPlaying) {
+                try{
+                    const playPromise = audioRef.current.play();
+                    if (playPromise !== undefined) {
+                        playPromise.then((audio) => {
+                            audioRef.current.play();
+                        });
+                    }
+                } catch {
+
+                }
+            }
+        }, 150);
+    };
 
     const songEndHandler = async () => {
         let currentIndex = songData.findIndex(
@@ -58,7 +91,16 @@ function App(props) {
             ...songState,
             currentSong: [songData[(currentIndex + 1) % songData.length]],
         });
-        audioRef.current.play();
+        if(uiState.loop) {
+            const playPromise = audioRef.current.play();
+            if (playPromise !== undefined) {
+                playPromise.then((audio) => {
+                    audioRef.current.play();
+                });
+            }
+        } else {
+            nextSongHandler()
+        }
     };
 
     const songInfoHandler = (e) => {

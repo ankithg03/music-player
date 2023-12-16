@@ -7,6 +7,7 @@ import { Layout } from './Layout';
 import { Home } from './Home';
 import { Album } from './Album';
 import { Playlist } from './Playlist';
+import { Artist } from './Artist';
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
     {
       path: "/playlist",
       element: <Playlist />,
+    },
+    {
+      path: "/artist",
+      element: <Artist />,
     }]
   }
   

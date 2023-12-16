@@ -1,10 +1,13 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import {
     RiPlayListLine,
     RiSunLine,
     RiMoonLine,
     RiSkipBackLine,
     RiSkipForwardLine,
+    RiLoopRightFill,
+    RiShuffleLine
+
 } from "react-icons/ri";
 import { useSelector } from 'react-redux'
 
@@ -21,7 +24,15 @@ function PlayerControl({
     audioRef,
 }) {
     const currentPlayingData = useSelector(currentPlaying)
-    const songData = [currentPlayingData]
+    let queue = localStorage.getItem('queue-playing')
+    queue = queue ? JSON.parse(queue) : [currentPlaying]
+    const [songData, setSongData] = useState(queue)
+    useEffect(() => {
+        let queue = localStorage.getItem('queue-playing')
+        queue = queue ? JSON.parse(queue) : [currentPlaying]
+        setSongData(queue)
+    }, [currentPlayingData])
+    
     let currentIndex = songData.findIndex(
         (song) => song === songState.currentSong[0]
     );
@@ -42,6 +53,7 @@ function PlayerControl({
                 });
             }
             if (songState.isPlaying) {
+                // this 2
                 const playPromise = audioRef.current.play();
                 if (playPromise !== undefined) {
                     playPromise.then((audio) => {
@@ -58,8 +70,14 @@ function PlayerControl({
                 ...songState,
                 currentSong: [songData[(currentIndex + 1) % songData.length]],
             });
-            if (songState.isPlaying) {
-                audioRef.current.play();
+            if (!songState.isPlaying) {
+                // this 2
+                const playPromise = audioRef.current.play();
+                if (playPromise !== undefined) {
+                    playPromise.then((audio) => {
+                        audioRef.current.play();
+                    });
+                }
             }
         }, 150);
     };
@@ -92,8 +110,26 @@ function PlayerControl({
             );
         }
     };
+    const playMode = () => {
+        if (!uiState.loop) {
+            return (
+                <RiShuffleLine
+                    className="player__control-icon"
+                    onClick={()=>{setUiState({...uiState, loop: true})}}
+                />
+            );
+        } else {
+            return (
+                <RiLoopRightFill
+                    className="player__control-icon"
+                    onClick={()=>{setUiState({...uiState, loop: false})}}
+                />
+            );
+        }
+    };
 
     return (
+        <>
         <div className="player__control">
             <RiPlayListLine
                 uiState={uiState}
@@ -116,8 +152,12 @@ function PlayerControl({
                 className="player__control-icon"
                 onClick={nextSongHandler}
             />
+            {playMode()}
+        </div>
+        <div className="player__darkMode">
             <DarkModeButton />
         </div>
+        </>
     );
 }
 

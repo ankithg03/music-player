@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import LibrarySongArtist from "../../Elements/Library/LibrarySongArtist";
 import LibrarySongCover from "../../Elements/Library/LibrarySongCover";
 import LibrarySongTitle from "../../Elements/Library/LibrarySongTitle";
@@ -9,27 +9,34 @@ import {
 } from "../../../../custom/Redux/Reducers/Album/AlbumSlice";
 
 function LibraryListItem({ song, setSongState, songState, audioRef }) {
-    // console.log(song.id === songState.currentSong[0].id);
     // currentSong: [songData[(currentIndex + 1) % songData.length]],
     const currentPlayingData = useSelector(currentPlaying)
-    const songData = [currentPlayingData]
+    let queue = localStorage.getItem('queue-playing')
+    queue = queue ? JSON.parse(queue) : [currentPlaying]
+    const [songData, setSongData] = useState(queue)
+    useEffect(() => {
+        let queue = localStorage.getItem('queue-playing')
+        queue = queue ? JSON.parse(queue) : [currentPlaying]
+        setSongData(queue)
+    }, [currentPlayingData])
+    const playingSong = songState.currentSong[0]
     const changeCurrentSongHandler = () => {
         setTimeout(() => {
             setSongState({
                 ...songState,
-                currentSong: [songData[songData.findIndex((s) => s === song)]],
+                currentSong: [songData[songData.findIndex((s) => s.id === song.id)]],
             });
             console.log(songState.isPlaying);
             if (songState.isPlaying) {
+                // this 1
                 const playPromise = audioRef.current.play();
-                console.log(playPromise);
                 if (playPromise !== undefined) {
                     playPromise.then((audio) => {
                         audioRef.current.play();
                     });
                 }
             }
-        }, 100);
+        }, 150);
     };
     return (
         <div

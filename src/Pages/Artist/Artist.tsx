@@ -3,21 +3,30 @@ import ContentLoader from 'react-content-loader'
 import { AlbumComponent } from '../Home/AlbumComponent';
 import { useLocation } from 'react-router-dom';
 
-const Album = () => {
+const Artist = () => {
 //   const homeData = useSelector(homePageData)
-    const [album, setAlbum] = useState<any>({})
+    const [artist, setArtist] = useState<any>({})
+    const [artistData, setArtistData] = useState<any>({})
+
     const location = useLocation();
 
   const [isLoading, setIsLoading] = useState(true)
   const [isInvalid, setIsInvalid] = useState(false)
 
-  const handleGetAlbum = (albumURL:string, id:string|false = '') => {
-        fetch('https://saavn.me/albums?link='+albumURL).then(
+  const handleGetArtist = (artistURL:string, id:string|false = '') => {
+        fetch(`https://saavn.me/artists/${id}/songs`).then(
+                res => res.json()
+              ).then(jsonResponse => {
+                    setTimeout(()=>{
+                        setArtist(jsonResponse)
+                        setIsLoading(false)
+                    }, 1000)
+                })
+        fetch('https://saavn.me/artists?link='+artistURL).then(
             res => res.json()
           ).then(jsonResponse => {
-            // console.log('aaa', jsonResponse)
                 setTimeout(()=>{
-                    setAlbum(jsonResponse)
+                    setArtistData(jsonResponse)
                     setIsLoading(false)
                 }, 1000)
             })
@@ -44,11 +53,16 @@ const Album = () => {
             setIsInvalid(true)
         } else {
           setIsLoading(true)
-          handleGetAlbum(query, id)
+          handleGetArtist(query, id)
       }
     }
       
   }, [location.search])
+  let image: string = ""
+  artistData?.data?.image.every((individualImage?: {link:string})=>{
+    image = String(individualImage?.link)
+    return individualImage?.link
+  })
   return (
     <div className='flex w-full'>
       {isInvalid ? 'Invalid URL please try later':''}
@@ -80,11 +94,17 @@ const Album = () => {
               </ContentLoader>)
             })}
           </div></div>) :
-        (<div className='grid gap-4 max-h-[65vh] overflow-y-scroll pb-8'>
-          <AlbumComponent 
-            albumData={album?.data?.songs} 
-            title={album?.data?.name}  
-            type={"song"}/>
+        (<div className='m-auto'>
+          <div className='grid gap-4 max-h-[65vh] overflow-y-scroll pb-16'>
+          <div>
+              <img className="rounded-full w-48 m-auto" src={image} alt={artistData?.data?.name} />
+              <h2 className='font-bold text-center'>{artistData?.data?.name}</h2>
+            </div>
+            <AlbumComponent 
+              albumData={artist?.data?.results} 
+              type={"song"}
+              />
+          </div>
         </div>)}
     </div>
   )
@@ -103,4 +123,4 @@ const getQueryVariable = (variable:string) =>
          }
          return(false);
 }
-export default Album
+export default Artist

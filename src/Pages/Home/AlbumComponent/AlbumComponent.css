@@ -4,3 +4,10 @@
 .album-item img{
     transition: .6s all;
 }
+.download-btn {
+    min-width: 7rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    max-width: 4rem;
+}
