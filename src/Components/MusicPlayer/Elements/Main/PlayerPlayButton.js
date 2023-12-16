@@ -29,8 +29,7 @@ function PlayerPlayButton({
                 });
             }
             setSongState({ ...songState, isPlaying: false });
-        } else if(!songState.isPlaying) {
-            console.log('aaa here')
+        } else if(songState.isPlaying) {
             const playPromise = audioRef.current.play();
             if (playPromise !== undefined) {
                 playPromise.then((audio) => {
