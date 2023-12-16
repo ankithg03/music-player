@@ -70,7 +70,7 @@ function PlayerControl({
                 ...songState,
                 currentSong: [songData[(currentIndex + 1) % songData.length]],
             });
-            if (!songState.isPlaying) {
+            if (songState.isPlaying) {
                 // this 2
                 const playPromise = audioRef.current.play();
                 if (playPromise !== undefined) {
