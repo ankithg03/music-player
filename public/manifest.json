@@ -1,8 +1,8 @@
 {
   "name": "AG's Music Player",
   "short_name": "AG's Music Player",
-  "theme_color": "#fff",
-  "background_color": "#ffd300",
+  "theme_color": "#ffce7d",
+  "background_color": "#f3e7d3",
   "display": "standalone",
   "scope": "/",
   "start_url": ".",
