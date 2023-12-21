@@ -11,7 +11,7 @@ const Header = () => {
         >
             <NavLink to={'/'}>
                 <div
-                    className="w-full text-start text-lg font-extrabold sm:w-fit sm:text-left"
+                    className="w-full text-start text-lg font-extrabold sm:w-fit sm:text-left pb-2 md:pb-0"
                 >
                    <img src={logo} className="logo"/>
                 </div>
