@@ -46,6 +46,64 @@ const SuggestionsList = (props: any) => {
       return (<span  className='absolute user-input block w-full px-4 py-2 text-sm text-gray-900 border border-gray-300 bg-gray-50 border-t-0 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 rounded-es-lg rounded-ee-lg'>
           <ul className="suggestions-list ">
             {isLoading ? (<div>Loading...</div>) : ''}
+            {suggestions?.topQuery?.results?.length && !isLoading? (
+              <div>
+                 <span className='font-bold'>
+                    Top
+                 </span>
+                 {
+                  suggestions?.topQuery?.results?.map((top:any, key: number)=>{
+                    if (top.type === "song") {
+                      const song = top
+                      const downloadUrl = song?.downloadUrl?.find((urlData: any)=>urlData?.link)
+                      const image = song.image?.find((image?: {link: string, quality: string})=>image?.link)
+                      return (
+                        <div className='flex mb-2'
+                        onClick={()=>handleData(song, downloadUrl)}>
+                          <img className="rounded mr-2 w-9" src={image?.link} />
+                          {filterTitle(song?.title)}
+                          </div>
+                      )
+                    } else if (top.type === "artist") {
+                      const image = top.image?.find((image?: {link: string, quality: string})=>image?.link)
+
+                      return (<div key={key}>
+                      <Link  
+                        className='flex mb-2'
+                        to={`/artist?id=${top?.id}&query=${top?.url}`} 
+                        onClick={
+                          ()=>{
+                            setDisplaySuggestions(false)
+                            setInputValue('')
+                          }
+                        }
+                      >
+                         <img className="rounded mr-2 w-9" src={image?.link} />
+                         {filterTitle(top?.title)}
+                      </Link>
+                    </div>)
+                    } else if (top.type === "album") {
+                      return (<div key={key}>
+                        <Link  
+                          className='flex mb-2'
+                          to={`/album?id=${top?.id}&query=${top?.url}`} 
+                          onClick={
+                            ()=>{
+                              setDisplaySuggestions(false)
+                              setInputValue('')
+                            }
+                          }
+                        >
+                           <img className="rounded mr-2 w-9" src={top?.link} />
+                           {filterTitle(top?.title)}
+                        </Link>
+                      </div>)
+                    }
+                      
+                  })
+                 }
+              </div>
+            ): ''}
             {suggestions?.songs?.results?.length && !isLoading? (
               <div>
                  <span className='font-bold'>
@@ -166,15 +224,26 @@ const SuggestionsList = (props: any) => {
 
     const filterSong = async (data?: any) => {
       if (data?.songs?.results?.length) {
-        const songResults = await Promise.all(
+        let songResults = await Promise.all(
           data?.songs?.results.map(async (song: any) => {
             const response = await fetch('https://saavn.me/songs?link=' + song?.url)
             const jsonResponse = await response.json();
             return { ...song, downloadUrl: jsonResponse.data?.[0]?.downloadUrl }
           })
         );
+        songResults = await Promise.all(
+          data?.topQuery?.results.map(async (top: any) => {
+            const song = top
+            if(top.type === "song") {
+              const response = await fetch('https://saavn.me/songs?link=' + song?.url)
+              const jsonResponse = await response.json();
+              return { ...song, downloadUrl: jsonResponse.data?.[0]?.downloadUrl }
+            }
+            return { ...song }
+          })
+        );
         
-        return { ...data, songs: { results: songResults } }
+        return { ...data, topQuery: { results: songResults } }
       }
       return data;
     }

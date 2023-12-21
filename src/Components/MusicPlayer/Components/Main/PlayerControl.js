@@ -44,6 +44,8 @@ function PlayerControl({
                     ...songState,
                     currentSong: [songData[songData.length - 1]],
                 });
+                localStorage.setItem('current-playing', JSON.stringify(songData[songData.length - 1]))
+
             } else {
                 setSongState({
                     ...songState,
@@ -51,6 +53,8 @@ function PlayerControl({
                         songData[(currentIndex - 1) % songData.length],
                     ],
                 });
+                localStorage.setItem('current-playing', JSON.stringify(songData[(currentIndex - 1) % songData.length]))
+
             }
             if (songState.isPlaying) {
                 // this 2
@@ -70,6 +74,7 @@ function PlayerControl({
                 ...songState,
                 currentSong: [songData[(currentIndex + 1) % songData.length]],
             });
+            localStorage.setItem('current-playing', JSON.stringify(songData[(currentIndex + 1) % songData.length]))
             if (songState.isPlaying) {
                 // this 2
                 const playPromise = audioRef.current.play();

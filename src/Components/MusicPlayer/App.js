@@ -50,13 +50,11 @@ function App(props) {
     
     }, [songData?.[0]?.id], setSongState)
     useEffect(()=>{
-        console.log('aaa', songState, songState.currentSong?.[0]?.id, [currentPlayingData])
         if(!songState.currentSong?.[0]?.id){
             setSongState({...songState, currentSong: [currentPlayingData]})
         }
     }, [currentPlayingData])
     const audioSectionRef = props.audioRef
-    console.log('aaaa 0', songState, currentPlaying, currentPlayingData, audioSectionRef)
 
     // Reference for the audio
     const audioRef = useRef(null);
@@ -68,7 +66,6 @@ function App(props) {
     );
 
     const nextSongHandler = () => {
-        console.log('aaa 1',songData.length, [songData[(currentIndex + 1) % songData.length]], currentIndex, (currentIndex + 1) % songData.length)
         setTimeout(() => {
             setSongState({
                 ...songState,

@@ -21,6 +21,8 @@ function PlayerPlayButton({
     const dispatch = useDispatch()
     const playPauseHandler = () => {
         setUiState({ ...uiState, songPlaying: !uiState.songPlaying });
+        console.log('aaa', uiState.songPlaying, songState.isPlaying)
+
         if (uiState.songPlaying === true) {
             const playPromise = audioRef.current.pause();
             if (playPromise !== undefined) {
@@ -29,7 +31,7 @@ function PlayerPlayButton({
                 });
             }
             setSongState({ ...songState, isPlaying: false });
-        } else if(songState.isPlaying) {
+        } else if(!songState.isPlaying) {
             const playPromise = audioRef.current.play();
             if (playPromise !== undefined) {
                 playPromise.then((audio) => {

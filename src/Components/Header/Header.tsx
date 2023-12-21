@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { SearchSuggestion } from '../SearchSuggestion'
+import logo from "./icon/Logo.png"
 import "./Header.css";
 const Header = () => {
     const [toggle, setToggle] = useState(true)
@@ -10,10 +11,9 @@ const Header = () => {
         >
             <NavLink to={'/'}>
                 <div
-                    className="w-full text-start text-lg font-extrabold sm:w-fit sm:text-left pb-4"
+                    className="w-full text-start text-lg font-extrabold sm:w-fit sm:text-left"
                 >
-                    <span className="text-violet-500">Ank's</span>
-                    <span className="dark:text-slate-400">Music</span>
+                   <img src={logo} className="logo"/>
                 </div>
             </NavLink>
             <button
@@ -115,8 +115,11 @@ const Header = () => {
                     <li className="group relative w-full overflow-x-visible text-right">
                         <span
                             className="mx-4 block whitespace-nowrap px-2 py-2 text-sm text-slate-400 no-underline transition hover:text-slate-900 dark:hover:text-slate-50"
+                            onClick={(event)=>{
+                                console.log(event.target)
+                            }}
                         >
-                            About & Terms
+                            Albums
                         </span>
                         <ul
                             className={`h-0 space-y-2 overflow-y-hidden bg-slate-50 px-4 py-0 transition-all delay-75 ease-in-out dark:bg-slate-800 ${!toggle?'group-hover:h-full group-hover:py-4':''}`}
@@ -124,19 +127,19 @@ const Header = () => {
                             <li>
                                 <NavLink
                                     className="undefined block whitespace-nowrap px-2 py-2 text-sm text-slate-400 no-underline transition hover:text-slate-900 dark:hover:text-slate-50"
-                                    to="/about"
+                                    to="/kannada"
                                     onClick={()=>setToggle(!toggle)}
                                 >
-                                    About
+                                    kannada
                                 </NavLink>
                             </li>
                             <li>
                             <NavLink
                                     className="undefined block whitespace-nowrap px-2 py-2 text-sm text-slate-400 no-underline transition hover:text-slate-900 dark:hover:text-slate-50"
-                                    to="/"
+                                    to="/hindi"
                                     onClick={()=>setToggle(!toggle)}
                                 >
-                                    Terms & Condition
+                                    Hindi
                                 </NavLink>
                             </li>
                         </ul>
