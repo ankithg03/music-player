@@ -14,7 +14,7 @@ const Artist = () => {
   const [isInvalid, setIsInvalid] = useState(false)
 
   const handleGetArtist = (artistURL:string, id:string|false = '') => {
-        fetch(`https://saavn.me/artists/${id}/songs`).then(
+        fetch(`https://saavn-ank.vercel.app/artists/${id}/songs`).then(
                 res => res.json()
               ).then(jsonResponse => {
                     setTimeout(()=>{
@@ -22,7 +22,7 @@ const Artist = () => {
                         setIsLoading(false)
                     }, 1000)
                 })
-        fetch('https://saavn.me/artists?link='+artistURL).then(
+        fetch('https://saavn-ank.vercel.app/artists?link='+artistURL).then(
             res => res.json()
           ).then(jsonResponse => {
                 setTimeout(()=>{

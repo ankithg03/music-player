@@ -10,7 +10,7 @@ const Playlist = () => {
   const [isInvalid, setIsInvalid] = useState(false)
 
   const handleGetAlbum = (id:string|false = '') => {
-        fetch('https://saavn.me/playlists?id='+id).then(
+        fetch('https://saavn-ank.vercel.app/playlists?id='+id).then(
             res => res.json()
           ).then(jsonResponse => {
             // console.log('aaa', jsonResponse)

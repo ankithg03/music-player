@@ -226,7 +226,7 @@ const SuggestionsList = (props: any) => {
       if (data?.songs?.results?.length) {
         let songResults = await Promise.all(
           data?.songs?.results.map(async (song: any) => {
-            const response = await fetch('https://saavn.me/songs?link=' + song?.url)
+            const response = await fetch('https://saavn-ank.vercel.app/songs?link=' + song?.url)
             const jsonResponse = await response.json();
             return { ...song, downloadUrl: jsonResponse.data?.[0]?.downloadUrl }
           })
@@ -235,7 +235,7 @@ const SuggestionsList = (props: any) => {
           data?.topQuery?.results.map(async (top: any) => {
             const song = top
             if(top.type === "song") {
-              const response = await fetch('https://saavn.me/songs?link=' + song?.url)
+              const response = await fetch('https://saavn-ank.vercel.app/songs?link=' + song?.url)
               const jsonResponse = await response.json();
               return { ...song, downloadUrl: jsonResponse.data?.[0]?.downloadUrl }
             }
@@ -260,7 +260,7 @@ const SuggestionsList = (props: any) => {
 
   useEffect(()=>{
     if(debouncedSearchTerm.length) {
-      fetch('https://saavn.me/search/all?query='+debouncedSearchTerm).then((res)=>res.json()).then(async (result)=>{
+      fetch('https://saavn-ank.vercel.app/search/all?query='+debouncedSearchTerm).then((res)=>res.json()).then(async (result)=>{
         const data = await filterSong(result.data)
         setFilteredSuggestions(data);
         setIsLoading(false)

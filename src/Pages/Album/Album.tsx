@@ -12,7 +12,7 @@ const Album = () => {
   const [isInvalid, setIsInvalid] = useState(false)
 
   const handleGetAlbum = (albumURL:string, id:string|false = '') => {
-        fetch('https://saavn.me/albums?link='+albumURL).then(
+        fetch('https://saavn-ank.vercel.app/albums?link='+albumURL).then(
             res => res.json()
           ).then(jsonResponse => {
             // console.log('aaa', jsonResponse)

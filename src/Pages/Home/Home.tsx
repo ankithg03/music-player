@@ -15,7 +15,7 @@ const Home = () => {
   useEffect(() => {
     if(homeData.status?.toLowerCase() !== "success"){
       setIsLoading(true)
-      fetch('https://saavn.me/modules?language=kannada,hindi,english').then(
+      fetch('https://saavn-ank.vercel.app/modules?language=kannada,hindi,english').then(
         res => res.json()
       ).then(jsonResponse => {
         setTimeout(()=>{
